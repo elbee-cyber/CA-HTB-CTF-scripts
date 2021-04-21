@@ -70,9 +70,11 @@ s.sendline(b'2')
 for o in range(1,9):
 	s.recvline()
 
-for i in range(1,510):
+for i in range(1,502):
 	equation=str(s.recvline())
 	equation=equation[2:-8]
+	if i==502:
+		print(str(s.recvuntil(b"}")))
 	print("#"*120)
 	print("Ques. "+str(i))
 	print("Before translation: "+equation)
@@ -104,15 +106,7 @@ for i in range(1,510):
 	s.recvline()
 	s.recvline()
 	s.recvline()
-	resp = str(s.recvline())
-	if "Correct" not in resp:
-		print("!"*100)
-		print("Server did not respond with correct! Flag below question mark?")
-		print("!"*100)
-		print("+="*100)
-		print(resp)
-		print("=+"*100)
-		break
+	s.recvline()
 	s.recvline()
 	s.recvline()
 	print("\n\n")
